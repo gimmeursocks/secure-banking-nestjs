@@ -1,4 +1,3 @@
-// database.spec.ts (Test file)
 import { Sequelize } from 'sequelize';
 import { User } from '../entity/user.entity';
 
