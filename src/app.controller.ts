@@ -17,7 +17,7 @@ export class AppController {
   @Get("user/:id")
   getData(@Param('id') id: number) : any {
     let sequelize: Sequelize;
-    sequelize = new Sequelize('test', 'root', 'root', {
+    sequelize = new Sequelize('test', 'root', '123456', {
       host: 'localhost',
       dialect: 'mysql',
       logging: false,

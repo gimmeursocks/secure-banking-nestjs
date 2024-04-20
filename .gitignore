@@ -11,7 +11,8 @@ pnpm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
-
+sequelize.config.ts
+database.spec.ts
 # OS
 .DS_Store
 
