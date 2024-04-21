@@ -1,5 +1,6 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/sequelize.config';
+
 export class Transaction extends Model {
     public id!: number;
     public email!: string;
@@ -30,5 +31,3 @@ Transaction.init(
 
 
 Transaction.sync();
-
-export default Transaction;

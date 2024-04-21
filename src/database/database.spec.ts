@@ -7,7 +7,7 @@ describe('Database Integration Test', () => {
 
   beforeAll(async () => {
     // Create a Sequelize instance and connect to the database
-    sequelize = new Sequelize('test', 'root', '123456', {
+    sequelize = new Sequelize('test', 'root', 'root', {
       host: 'localhost',
       dialect: 'mysql',
       logging: false,

@@ -1,6 +1,7 @@
 import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/sequelize.config';
 import { User } from '../entity/user.entity';
+
 export class Bank extends Model {
     public id!: number;
     public name!: string;
@@ -26,5 +27,3 @@ Bank.init(
 
 Bank.hasMany(User);
 Bank.sync();
-
-export default Bank;

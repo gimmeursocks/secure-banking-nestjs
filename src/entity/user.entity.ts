@@ -1,12 +1,11 @@
-import { Model, DataTypes, Transaction } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 import { sequelize } from '../database/sequelize.config';
-//import { transactions } from '../entity/transactions.entity';
+import { Transaction } from '../entity/transaction.entity';
+
 export class User extends Model {
     public id!: number;
     public email!: string;
     public password!: string;
-
-    // Define other methods or customizations here if needed
 }
 
 User.init(
@@ -31,7 +30,5 @@ User.init(
     },
 );
 
-//User.hasMany(transactions);
+User.hasMany(Transaction);
 User.sync();
-
-export default User;
