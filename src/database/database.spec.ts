@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize';
 import { User } from '../entity/user.entity';
+import { Bank } from '../entity/bank.entity'; 
 
 describe('Database Integration Test', () => {
   let sequelize: Sequelize;
@@ -12,8 +13,9 @@ describe('Database Integration Test', () => {
       logging: false,
     });
 
-    // Sync the model with the database
+    // Sync the models with the database
     await User.sync({ force: true }); // Force sync to recreate the table
+    await Bank.sync({ force: true }); // Force sync to recreate the table
   });
 
   afterAll(async () => {
@@ -39,6 +41,24 @@ describe('Database Integration Test', () => {
     expect(user.password).toBe('testuser');
   });
 
+  it('should create a user', async () => {
+    // Create a new user
+    const bank = await Bank.create({
+        name: 'testuser'
+    });
+
+    // Verify that the user was created successfully
+    expect(bank.id).toBeDefined();
+    expect(bank.name).toBe('testuser');
+  });
+  it('should find users', async () => {
+    // Find all users
+    const banks = await Bank.findAll();
+
+    // Verify that users were found
+    expect(banks).toHaveLength(1);
+  });
+
   it('should find users', async () => {
     // Find all users
     const users = await User.findAll();
@@ -47,5 +67,5 @@ describe('Database Integration Test', () => {
     expect(users).toHaveLength(1);
   });
 
-  // Add more tests for other CRUD operations as needed
+  // Add tests for the Bank model as needed
 });
