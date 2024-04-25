@@ -4,12 +4,14 @@ import { Sequelize } from 'sequelize';
 import { User } from './users/user.entity';
 import { BankAccount } from './banks/bank-account/bank-account.entity';
 import { Transaction } from './banks/transactions/transaction.entity';
+import { UserService } from './users/user.service';
 
 
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService,
+    private readonly userService: UserService,) {}
   
   @Get()
   getHello(): string {
@@ -42,4 +44,14 @@ export class AppController {
     }
     return user;
   }
+
+  @Post("yarab")
+  async makeUse(@Body() req: any): Promise<any> {
+    const user = await this.userService.findUserByEmail(req.email)
+    if(!user){
+      return "a7a";
+    }
+    return user;
+  }
+
 }

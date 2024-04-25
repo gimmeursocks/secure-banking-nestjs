@@ -5,7 +5,7 @@ import { BankAccount } from '../banks/bank-account/bank-account.entity';
 export class User extends Model {
     public email!: string;
     public username!: string;
-    private password!: string;
+    public password!: string;
     private pass_salt!: string;
     public phone!: string;
     public SSN!: string;
