@@ -1,9 +1,9 @@
-import { Controller, Get, Query, Param } from '@nestjs/common';
+import { Controller, Get, Query, Param, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Sequelize } from 'sequelize';
-import { User } from './entity/user.entity';
-import { Bank } from './entity/bank.entity';
-import { Transaction } from './entity/transaction.entity';
+import { User } from './users/user.entity';
+import { BankAccount } from './banks/bank-account/bank-account.entity';
+import { Transaction } from './banks/transactions/transaction.entity';
 
 
 
@@ -13,33 +13,33 @@ export class AppController {
   
   @Get()
   getHello(): string {
+    Transaction.name;
     return this.appService.getHello();
   }
 
-  @Get("reset")
-  resetTables() : any {
-    User.sync({force : true});
-    Bank.sync({force : true});
-    Transaction.sync({force : true});
-  }
-  
-  @Get("trans/:id")
-  getData(@Param('id') id: number) : any {
-    let sequelize: Sequelize;
-    sequelize = new Sequelize('test', 'root', 'root', {
-      host: 'localhost',
-      dialect: 'mysql',
-      logging: false,
-    });
-
-    return Transaction.findByPk(id);
+  @Get("trans/:acc_num")
+  getData(@Param('acc_num') acc_num: string): any {
+    return BankAccount.findByPk(acc_num);
   }
 
   @Get("make")
-  makeUser(@Query('email') email: string, @Query('amount') amount: number) : any{
-    return Transaction.create({
-      email : email,
-      amount : amount
+  makeAcc(@Query('account_num') account_num: string, @Query('balance') balance: string) : any{
+    return BankAccount.create({
+      account_num : account_num,
+      balance : balance
     })
+  }
+
+  @Post("signup")
+  async makeUser(@Body() req: any): Promise<any> {
+    const existingUser = await BankAccount.findByPk(req.AccountNum);
+    if(!existingUser) {
+      return "User not found";
+    }
+    const user = await User.create(req);
+    if(!user){
+      return "a7a";
+    }
+    return user;
   }
 }

@@ -1,10 +1,13 @@
 import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../database/sequelize.config';
+import { sequelize } from '../../database/sequelize.config';
+import { User } from '../../users/user.entity';
 
 export class Transaction extends Model {
     public id!: number;
-    public email!: string;
-    public amount: number;
+    public sender!: string;
+    public receiver!: string;
+    public amount!: string;
+    public comment!: string;
 }
 
 Transaction.init(
@@ -14,13 +17,12 @@ Transaction.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        email: {
+        amount: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        amount: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+        comment: {
+            type: DataTypes.STRING,
         },
     },
     {
@@ -29,5 +31,6 @@ Transaction.init(
     },
 );
 
-
+Transaction.belongsTo(User, { as: 'sender' });
+Transaction.belongsTo(User, { as: 'receiver' });
 Transaction.sync();
