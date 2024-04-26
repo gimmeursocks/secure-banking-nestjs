@@ -5,10 +5,18 @@ import { LocalStrategy } from '../local-strategy';
 import { UsersModule } from 'src/users/users.module';
 import { PassportModule } from '@nestjs/passport';
 import { UserService } from 'src/users/user.service';
-
+import { JwtModule } from '@nestjs/jwt';
+import { config } from 'dotenv';
+import { JwtStrategy } from './jwt-strategy';
+import { EncryptionService} from '../../encryption/encryption.service'
+config();
+const secret = process.env.ACCESS_TOKEN_SECRET;
 @Module({
-  imports:[UsersModule,PassportModule],
-  providers: [AuthService,LocalStrategy,UserService],
+  imports:[UsersModule,PassportModule,JwtModule.register({
+    secret:secret,
+    signOptions: {expiresIn:50},
+  })],
+  providers: [AuthService,LocalStrategy,UserService,JwtStrategy, EncryptionService],
   controllers: [AuthController]
 })
 export class AuthModule {}

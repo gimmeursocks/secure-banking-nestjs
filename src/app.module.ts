@@ -5,11 +5,12 @@ import { UsersModule } from './users/users.module';
 import { BanksModule } from './banks/banks.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserService } from './users/user.service';
+import {EncryptionService} from './encryption/encryption.service'
 import { start } from 'repl';
 
 @Module({
   imports: [UsersModule, BanksModule, AuthModule],
   controllers: [AppController],
-  providers: [AppService,UserService],
+  providers: [AppService,UserService,EncryptionService],
 })
 export class AppModule {}

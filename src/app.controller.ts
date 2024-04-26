@@ -5,13 +5,14 @@ import { User } from './users/user.entity';
 import { BankAccount } from './banks/bank-account/bank-account.entity';
 import { Transaction } from './banks/transactions/transaction.entity';
 import { UserService } from './users/user.service';
+import  {EncryptionService } from './encryption/encryption.service'
 
 
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService,
-    private readonly userService: UserService,) {}
+    private readonly userService: UserService,private encryptionService: EncryptionService) {}
   
   @Get()
   getHello(): string {
@@ -47,11 +48,21 @@ export class AppController {
 
   @Post("yarab")
   async makeUse(@Body() req: any): Promise<any> {
-    const user = await this.userService.findUserByEmail(req.email)
+    const user = await this.userService.createUser(req);
     if(!user){
       return "a7a";
     }
     return user;
+  }
+  
+  @Post("ttt")
+  async enc(@Body() req: any): Promise<any> {
+    return this.encryptionService.encryptData(req.email);
+  }
+
+  @Post("check")
+  async check(@Body() req: any): Promise<any> {
+    return this.userService.findUserByEmail(req.email);
   }
 
 }

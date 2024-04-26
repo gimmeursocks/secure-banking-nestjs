@@ -11,7 +11,7 @@ export class User extends Model {
     public SSN!: string;
     public gender!: string;
     public address!: string;
-    public admin!: boolean;
+    public admin!: string;
 }
 
 User.init(
@@ -50,8 +50,8 @@ User.init(
             allowNull: false,
         },
         admin: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: false,
+            type: DataTypes.STRING,
+            defaultValue: 'false',
         }
     },
     {
