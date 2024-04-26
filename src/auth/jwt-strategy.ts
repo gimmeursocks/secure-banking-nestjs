@@ -1,9 +1,10 @@
 import { PassportStrategy } from "@nestjs/passport";
-import { Passport } from "passport";
 import { ExtractJwt, Strategy } from "passport-jwt";
 import { config } from 'dotenv';
+
 config();
 const secret = process.env.ACCESS_TOKEN_SECRET;
+
 export class JwtStrategy extends PassportStrategy(Strategy){
     constructor(){
         super({
@@ -13,7 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy){
         })
     }
 
-    async validate(payload){
+    async validate(payload: any){
         return{
             email:payload.sub,
             username:payload.username,

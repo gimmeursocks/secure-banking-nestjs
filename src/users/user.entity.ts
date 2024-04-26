@@ -6,7 +6,6 @@ export class User extends Model {
     public email!: string;
     public username!: string;
     public password!: string;
-    private pass_salt!: string;
     public phone!: string;
     public SSN!: string;
     public gender!: string;
@@ -29,10 +28,6 @@ User.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        pass_salt: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
         phone: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -50,7 +45,7 @@ User.init(
             allowNull: false,
         },
         admin: {
-            type: DataTypes.STRING,
+            type: DataTypes.BOOLEAN,
             defaultValue: 'false',
         }
     },

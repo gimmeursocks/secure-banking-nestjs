@@ -1,6 +1,5 @@
 import { Controller, Get, Query, Param, Post, Body } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Sequelize } from 'sequelize';
 import { User } from './users/user.entity';
 import { BankAccount } from './banks/bank-account/bank-account.entity';
 import { Transaction } from './banks/transactions/transaction.entity';
