@@ -7,6 +7,10 @@ import { BankAccount } from '../banks/bank-account/bank-account.entity';
 export class UserService {
   constructor(private encryptionService: EncryptionService) {}
 
+  findAll(): string[] {
+    return ['User 1', 'User 2', 'User 3'];
+  }
+
   async createUser(userData: any): Promise<User> {
     try {
       const encryptedUserData: any = {};

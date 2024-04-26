@@ -63,5 +63,4 @@ export class AppController {
   async check(@Body() req: any): Promise<any> {
     return this.userService.findUserByEmail(req.email);
   }
-
 }
