@@ -1,59 +1,61 @@
-import { Model, DataTypes } from 'sequelize';
-import { sequelize } from '../database/sequelize.config';
+import { Model, DataType, Table, Column, ForeignKey } from 'sequelize-typescript';
 import { BankAccount } from '../banks/bank-account/bank-account.entity';
 
+@Table
 export class User extends Model {
-    public email!: string;
-    public username!: string;
-    public password!: string;
-    public phone!: string;
-    public SSN!: string;
-    public gender!: string;
-    public address!: string;
-    public admin!: string;
+    @Column({
+        type: DataType.STRING,
+        primaryKey: true,
+        allowNull: false,
+    })
+    email: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    username: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    password: string;
+
+    @ForeignKey(() => BankAccount)
+    @Column({
+        type: DataType.STRING,
+    })
+    account_num: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    phone: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    SSN: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    gender: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    address: string;
+
+    @Column({
+        type: DataType.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+    })
+    admin: string;
 }
-
-User.init(
-    {
-        email: {
-            type: DataTypes.STRING,
-            primaryKey: true,
-            allowNull: false
-        },
-        username: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        phone: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        SSN: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        gender: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        address: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        admin: {
-            type: DataTypes.BOOLEAN,
-            defaultValue: 'false',
-        }
-    },
-    {
-        sequelize,
-        modelName: 'User',
-    },
-);
-
-User.belongsTo(BankAccount, { as: '_' });
-User.sync();

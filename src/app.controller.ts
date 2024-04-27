@@ -6,8 +6,6 @@ import { Transaction } from './banks/transactions/transaction.entity';
 import { UserService } from './users/user.service';
 import  {EncryptionService } from './encryption/encryption.service'
 
-
-
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService,
@@ -15,7 +13,6 @@ export class AppController {
   
   @Get()
   getHello(): string {
-    Transaction.name;
     return this.appService.getHello();
   }
 
@@ -48,6 +45,7 @@ export class AppController {
   @Post("yarab")
   async makeUse(@Body() req: any): Promise<any> {
     const user = await this.userService.createUser(req);
+    console.log(req);
     if(!user){
       return "a7a";
     }

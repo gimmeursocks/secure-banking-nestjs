@@ -1,6 +1,15 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { Sequelize } from 'sequelize-typescript';
+import { BankAccount } from './banks/bank-account/bank-account.entity';
+import { User } from './users/user.entity';
+import { Transaction } from './banks/transactions/transaction.entity';
+
+const databaseName = process.env.DATABASE_NAME;
+const databaseUser = process.env.DATABASE_USER;
+const databasePassword = process.env.DATABASE_PASSWORD;
+const databaseHost = process.env.DATABASE_HOST;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -13,6 +22,15 @@ async function bootstrap() {
   };
   app.enableCors(corsOptions);
   
+  const sequelize = new Sequelize(databaseName, databaseUser, databasePassword, {
+    host: databaseHost,
+    dialect: 'mysql',
+  });
+  
+  sequelize.addModels([BankAccount, User, Transaction]);
+
+  await sequelize.sync();
+
   await app.listen(3000);
 }
 bootstrap();

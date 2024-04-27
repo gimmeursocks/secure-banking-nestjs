@@ -21,10 +21,14 @@ export class UserService {
           } else {
             encryptedUserData[key] = this.encryptionService.encryptData(userData[key]);
           }
+          console.log(key);
+          console.log(encryptedUserData[key]);
         }
       }
-      if(userData.AccountNum){
-        const existingUser = await BankAccount.findByPk(encryptedUserData["AccountNum"]);
+      console.log(userData.account_num);
+      if(userData.account_num){
+        const existingUser = await BankAccount.findByPk(encryptedUserData["account_num"]);
+        console.log(encryptedUserData["account_num"]);
         if(existingUser){
           const user = await User.create(encryptedUserData);
           return user;
