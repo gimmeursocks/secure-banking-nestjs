@@ -46,7 +46,6 @@ export class AppController {
   @Post("yarab")
   async makeUse(@Body() req: any): Promise<any> {
     const user = await this.userService.createUser(req);
-    console.log(user);
     if(!user){
       return "a7a";
     }
