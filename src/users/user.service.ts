@@ -2,10 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { User } from './user.entity';
 import { EncryptionService } from '../encryption/encryption.service'
 import { BankAccount } from '../banks/bank-account/bank-account.entity';
+import { BankAccountService } from  '../banks/bank-account/bank-account.service';
 
 @Injectable()
 export class UserService {
-  constructor(private encryptionService: EncryptionService) {}
+  constructor(private encryptionService: EncryptionService,private bankservice:BankAccountService) {}
 
   findAll(): string[] {
     return ['User 1', 'User 2', 'User 3'];
@@ -25,10 +26,13 @@ export class UserService {
           console.log(encryptedUserData[key]);
         }
       }
-      console.log(userData.account_num);
+      console.log("zobry");
+      console.log(userData.AccountNum);
       if(userData.account_num){
-        const existingUser = await BankAccount.findByPk(encryptedUserData["account_num"]);
-        console.log(encryptedUserData["account_num"]);
+        //const encryptacount = this.encryptionService.encryptData()
+        const existingUser = await this.bankservice.findByNum(userData.account_num);
+        //const existingUser = await BankAccount.findByPk(encryptedUserData["account_num"]);
+        console.log(existingUser);
         if(existingUser){
           const user = await User.create(encryptedUserData);
           return user;

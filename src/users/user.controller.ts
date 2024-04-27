@@ -12,4 +12,5 @@ export class UserController {
   findAll(): string[] {
     return this.userService.findAll();
   }
+
 }

@@ -5,11 +5,12 @@ import { BankAccount } from './banks/bank-account/bank-account.entity';
 import { Transaction } from './banks/transactions/transaction.entity';
 import { UserService } from './users/user.service';
 import  {EncryptionService } from './encryption/encryption.service'
+import { BankAccountService } from './banks/bank-account/bank-account.service';
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService,
-    private readonly userService: UserService,private encryptionService: EncryptionService) {}
+    private readonly userService: UserService,private encryptionService: EncryptionService,private bankservice:BankAccountService) {}
   
   @Get()
   getHello(): string {
@@ -45,7 +46,7 @@ export class AppController {
   @Post("yarab")
   async makeUse(@Body() req: any): Promise<any> {
     const user = await this.userService.createUser(req);
-    console.log(req);
+    console.log(user);
     if(!user){
       return "a7a";
     }
@@ -59,6 +60,16 @@ export class AppController {
 
   @Post("check")
   async check(@Body() req: any): Promise<any> {
+    return this.bankservice.CreateAccount(req);
+  }
+
+  @Post("test")
+  async test(@Body() req: any): Promise<any> {
     return this.userService.findUserByEmail(req.email);
+  }
+
+  @Post("bos")
+  async bob(@Body() req: any): Promise<any> {
+    return this.bankservice.findByNum(req.account_num);
   }
 }
