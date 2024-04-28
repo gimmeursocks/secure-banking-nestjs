@@ -19,7 +19,11 @@ export class UserService {
         if (Object.prototype.hasOwnProperty.call(userData, key)) {
           if (key === 'password') {
             encryptedUserData[key] = this.encryptionService.hashPassword(userData[key]);
-          } else {
+          }
+          else if(key === 'role'){
+            encryptedUserData[key] = userData[key];
+          }
+           else {
             encryptedUserData[key] = this.encryptionService.encryptData(userData[key]);
           }
         }
@@ -44,7 +48,7 @@ export class UserService {
       
       if (user) {
         for (const key in user.dataValues) {
-          if (user.dataValues[key] && key != "password" && key != "admin" && key != "updatedAt" && key != "createdAt") {
+          if (user.dataValues[key] && key != "password" && key != "role" && key != "updatedAt" && key != "createdAt") {
             user.dataValues[key] = this.encryptionService.decryptData(user[key]);
           }
         }

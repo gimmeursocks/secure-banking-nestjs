@@ -2,6 +2,9 @@ import { Controller,Get, Post,Request, UseGuards } from '@nestjs/common';
 import { LocalAuthGuard } from './local-auth.guard';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard } from './jwt-auth.guard';
+import { Roles } from './roles.decorator';
+import { Role } from './role.enum'
+import { RolesGuard } from './roles.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -18,4 +21,15 @@ export class AuthController {
     async user(@Request() req: any): Promise<any> {
         return req.user; 
     }
+
+    @Roles(Role.Admin)
+    @Post('admin')
+    @UseGuards(JwtAuthGuard,RolesGuard)
+    async test(@Request() req: any): Promise<any> {
+        return req.user; 
+    }
+
+    
+
+
 }

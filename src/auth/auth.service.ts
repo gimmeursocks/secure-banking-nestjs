@@ -18,6 +18,7 @@ export class AuthService {
             asscess_token:this.jwatService.sign({
                 sub:user.email,
                 username:user.username,
+                role:user.role,
             })
         }
     }

@@ -53,9 +53,9 @@ export class User extends Model {
     address: string;
 
     @Column({
-        type: DataType.BOOLEAN,
+        type: DataType.STRING,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: 'user',
     })
-    admin: string;
+    role: string;
 }
