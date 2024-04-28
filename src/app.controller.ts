@@ -4,70 +4,77 @@ import { User } from './users/user.entity';
 import { BankAccount } from './banks/bank-account/bank-account.entity';
 import { Transaction } from './banks/transactions/transaction.entity';
 import { UserService } from './users/user.service';
-import  {EncryptionService } from './encryption/encryption.service'
+import { EncryptionService } from './encryption/encryption.service';
 import { BankAccountService } from './banks/bank-account/bank-account.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService,
-    private readonly userService: UserService,private encryptionService: EncryptionService,private bankservice:BankAccountService) {}
-  
+  constructor(
+    private readonly appService: AppService,
+    private readonly userService: UserService,
+    private encryptionService: EncryptionService,
+    private bankservice: BankAccountService,
+  ) {}
+
   @Get()
   getHello(): string {
     return this.appService.getHello();
   }
 
-  @Get("trans/:acc_num")
+  @Get('trans/:acc_num')
   getData(@Param('acc_num') acc_num: string): any {
     return BankAccount.findByPk(acc_num);
   }
 
-  @Get("make")
-  makeAcc(@Query('account_num') account_num: string, @Query('balance') balance: string) : any{
+  @Get('make')
+  makeAcc(
+    @Query('account_num') account_num: string,
+    @Query('balance') balance: string,
+  ): any {
     return BankAccount.create({
-      account_num : account_num,
-      balance : balance
-    })
+      account_num: account_num,
+      balance: balance,
+    });
   }
 
-  @Post("signup")
+  @Post('signup')
   async makeUser(@Body() req: any): Promise<any> {
     const existingUser = await BankAccount.findByPk(req.AccountNum);
-    if(!existingUser) {
-      return "User not found";
+    if (!existingUser) {
+      return 'User not found';
     }
     const user = await User.create(req);
-    if(!user){
-      return "a7a";
+    if (!user) {
+      return 'a7a';
     }
     return user;
   }
 
-  @Post("yarab")
+  @Post('yarab')
   async makeUse(@Body() req: any): Promise<any> {
     const user = await this.userService.createUser(req);
-    if(!user){
-      return "a7a";
+    if (!user) {
+      return 'a7a';
     }
     return user;
   }
-  
-  @Post("ttt")
+
+  @Post('ttt')
   async enc(@Body() req: any): Promise<any> {
     return this.encryptionService.encryptData(req.email);
   }
 
-  @Post("check")
+  @Post('check')
   async check(@Body() req: any): Promise<any> {
     return this.bankservice.CreateAccount(req);
   }
 
-  @Post("test")
+  @Post('test')
   async test(@Body() req: any): Promise<any> {
     return this.userService.findUserByEmail(req.email);
   }
 
-  @Post("bos")
+  @Post('bos')
   async bob(@Body() req: any): Promise<any> {
     return this.bankservice.findByNum(req.account_num);
   }

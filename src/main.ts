@@ -21,12 +21,17 @@ async function bootstrap() {
     credentials: true,
   };
   app.enableCors(corsOptions);
-  
-  const sequelize = new Sequelize(databaseName, databaseUser, databasePassword, {
-    host: databaseHost,
-    dialect: 'mysql',
-  });
-  
+
+  const sequelize = new Sequelize(
+    databaseName,
+    databaseUser,
+    databasePassword,
+    {
+      host: databaseHost,
+      dialect: 'mysql',
+    },
+  );
+
   sequelize.addModels([BankAccount, User, Transaction]);
 
   await sequelize.sync();

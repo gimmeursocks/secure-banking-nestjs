@@ -17,11 +17,15 @@ export class EncryptionService {
   encryptData(data: string): any {
     const cipher = Crypto.createCipheriv(encAlgo, this.secretKey, this.fixedIV);
     let encryptedData = cipher.update(data, 'utf8', 'hex');
-    return (encryptedData + cipher.final('hex'));
+    return encryptedData + cipher.final('hex');
   }
 
   decryptData(encryptedData: any): string {
-    const decipher = Crypto.createDecipheriv(encAlgo, this.secretKey, this.fixedIV);
+    const decipher = Crypto.createDecipheriv(
+      encAlgo,
+      this.secretKey,
+      this.fixedIV,
+    );
     let decryptedData = decipher.update(encryptedData, 'hex', 'utf8');
     return (decryptedData += decipher.final('utf8'));
   }
