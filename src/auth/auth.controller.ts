@@ -22,7 +22,7 @@ export class AuthController {
         return req.user; 
     }
 
-    @Roles(Role.Admin)
+    @Roles(Role.Admin,Role.User)
     @Post('admin')
     @UseGuards(JwtAuthGuard,RolesGuard)
     async test(@Request() req: any): Promise<any> {

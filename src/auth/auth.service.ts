@@ -15,11 +15,12 @@ export class AuthService {
     
     async generateToken(user: any){
         return{
-            asscess_token:this.jwatService.sign({
+            access_token:this.jwatService.sign({
                 sub:user.email,
                 username:user.username,
                 role:user.role,
-            })
+            }),
+            role: user.role
         }
     }
 }
