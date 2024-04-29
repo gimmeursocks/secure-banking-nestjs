@@ -1,4 +1,13 @@
-import { Controller, Get, Query, Param, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Param,
+  Post,
+  Body,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { User } from './users/user.entity';
 import { BankAccount } from './banks/bank-account/bank-account.entity';
@@ -6,6 +15,7 @@ import { Transaction } from './banks/transactions/transaction.entity';
 import { UserService } from './users/user.service';
 import { EncryptionService } from './encryption/encryption.service';
 import { BankAccountService } from './banks/bank-account/bank-account.service';
+import { TransactionService } from './banks/transactions/transaction.service';
 
 @Controller()
 export class AppController {
@@ -14,6 +24,7 @@ export class AppController {
     private readonly userService: UserService,
     private encryptionService: EncryptionService,
     private bankservice: BankAccountService,
+    private transactionService: TransactionService,
   ) {}
 
   @Get()
@@ -38,32 +49,32 @@ export class AppController {
       console.log(userData);
       const user = await this.userService.createUser(userData);
       if (!user) {
-        throw new HttpException("User creation failed", HttpStatus.INTERNAL_SERVER_ERROR);
+        throw new HttpException(
+          'User creation failed',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
       }
       return user;
     } catch (error) {
-      console.error("Error creating user:", error);
-      throw new HttpException("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
+      console.error('Error creating user:', error);
+      throw new HttpException(
+        'Internal Server Error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
     }
   }
 
-  @Post('ttt')
+  @Post('enc')
   async enc(@Body() req: any): Promise<any> {
-    return this.encryptionService.encryptData(req.email);
+    return this.encryptionService.encryptData(req.data);
   }
 
-  @Post('check')
-  async check(@Body() req: any): Promise<any> {
-    return this.bankservice.CreateAccount(req);
-  }
+  
 
   @Post('test')
   async test(@Body() req: any): Promise<any> {
     return this.userService.findUserByEmail(req.email);
   }
 
-  @Post('bos')
-  async bob(@Body() req: any): Promise<any> {
-    return this.bankservice.findByNum(req.account_num);
-  }
+
 }

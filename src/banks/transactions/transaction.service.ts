@@ -13,42 +13,31 @@ export class TransactionService {
     private bankService: BankAccountService,
   ) {}
 
-  async makeTransaction(
-    senderEmail: string,
-    receiverEmail: string,
-    amount: string,
-    comment: string,
-  ): Promise<Transaction> {
-    // Retrieve sender and receiver users
-    const sender = await this.userService.findUserByEmail(senderEmail);
-    const receiver = await this.userService.findUserByEmail(receiverEmail);
+  async makeTransaction(transData: any): Promise<Transaction> {
+    const sender = await this.userService.findUserByEmail(transData.sender);
+    const receiver = await this.userService.findUserByEmail(transData.receiver);
 
     if (!sender || !receiver) {
       throw new Error('Sender or receiver not found');
     }
-    const bankAccSender = await this.bankService.findByNum(sender.account_num);
-    const bankAccReciver = await this.bankService.findByNum(
-      receiver.account_num,
-    );
-    if (parseFloat((await bankAccSender).balance) < parseFloat(amount)) {
+
+    const bankAccSender = await this.bankService.findByPlainNum(sender.account_num);
+    const bankAccReciever = await this.bankService.findByPlainNum(receiver.account_num);
+
+    const amount = this.encryptionService.decryptData(transData.amount);
+
+    if (parseFloat(bankAccSender.balance) < parseFloat(amount)) {
       return null;
     }
-    const reciverMoney =
-      parseFloat((await bankAccReciver).balance) + parseFloat(amount);
-    const senderMoney =
-      parseFloat((await bankAccSender).balance) - parseFloat(amount);
+    const recieverMoney =
+      parseFloat(bankAccReciever.balance) + parseFloat(amount);
+    const senderMoney = parseFloat(bankAccSender.balance) - parseFloat(amount);
 
-    // Create a new transaction record
-    const transaction = await Transaction.create({
-      sender: sender.email,
-      receiver: receiver.email,
-      amount,
-      comment,
-    });
+    const transaction = await Transaction.create(transData);
 
     await this.bankService.updateByNum(
-      bankAccReciver.account_num,
-      reciverMoney.toString(),
+      bankAccReciever.account_num,
+      recieverMoney.toString(),
     );
     await this.bankService.updateByNum(
       bankAccSender.account_num,
@@ -59,7 +48,6 @@ export class TransactionService {
 
   async viewTransactions(email: string): Promise<Transaction[]> {
     try {
-      // Find all transactions where the sender or receiver email matches the user's email
       const transactions = await Transaction.findAll({
         where: {
           [Op.or]: [{ sender: email }, { receiver: email }],

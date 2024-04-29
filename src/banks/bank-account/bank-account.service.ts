@@ -15,10 +15,33 @@ export class BankAccountService {
     }
   }
 
-  async findByNum(num: string): Promise<BankAccount | null> {
+  async findByNum(enc_num: string): Promise<BankAccount | null> {
     try {
       const existingAccount = await BankAccount.findOne({
-        where: { account_num: num },
+        where: { account_num: enc_num },
+      });
+      if (existingAccount) {
+        for (const key in existingAccount.dataValues) {
+          if (
+            existingAccount.dataValues[key] &&
+            key != 'createdAt' &&
+            key != 'updatedAt'
+          ) {
+            existingAccount.dataValues[key] =
+              this.encryptionService.decryptData(existingAccount[key]);
+          }
+        }
+      }
+      return existingAccount.dataValues;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findByPlainNum(num: string): Promise<BankAccount | null> {
+    try {
+      const existingAccount = await BankAccount.findOne({
+        where: { account_num: this.encryptionService.encryptData(num) },
       });
       if (existingAccount) {
         for (const key in existingAccount.dataValues) {

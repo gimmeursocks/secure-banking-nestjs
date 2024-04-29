@@ -34,6 +34,7 @@ export class UserService {
 
   async findUserByEmail(email: string): Promise<User | null> {
     try {
+      console.log(email);
       const user = await User.findOne({ where: { email: email } });
 
       if (user) {
