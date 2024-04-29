@@ -23,6 +23,7 @@ export class AppController {
     private readonly appService: AppService,
     private readonly userService: UserService,
     private encryptionService: EncryptionService,
+    private bankservice : BankAccountService
   ) {}
 
   @Get()
@@ -38,5 +39,14 @@ export class AppController {
   @Post('test')
   async test(@Body() req: any): Promise<any> {
     return this.userService.findUserByEmail(req.email);
+  }
+
+  @Post('test2')
+  async test2(@Body() req: any): Promise<any> {
+    return this.bankservice.findByNum(req.num)
+  }
+  @Post('test3')
+  async test3(@Body() req: any): Promise<any> {
+    return this.bankservice.CreateAccount(req);
   }
 }

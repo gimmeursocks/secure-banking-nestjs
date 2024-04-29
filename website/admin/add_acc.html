@@ -17,8 +17,8 @@
     />
     <link rel="stylesheet" href="../shared/shared.css" />
     <link rel="stylesheet" href="../css/user_op.css" />
-    <script src="../js/operations.js"></script>
     <script src="../js/jquery-3.7.1.min.js"></script>
+    <script src="../js/addAccount.js" type="module"></script>
     <script>
       $(function () {
         $("#header").load("../shared/header_admin.html");
@@ -42,34 +42,31 @@
         <div class="row">
           <div class="col-md-6">
             <div class="inputs">
-              <label>Account Number</label>
-              <input
-                class="form-control"
-                id="account_num"
-                list="browsers"
-                placeholder="Account Number"
-              />
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="inputs">
-              <label>Balance</label>
-              <input
-                class="form-control"
-                id="balance"
-                list="browsers"
-                placeholder="Account Balance"
-              />
+              <form id="addForm">
+                <h2>Login</h2>
+                <div class="input-group">
+                  <label for="account_num">E-mail</label>
+                  <input type="text" id="account_num" name="account_num" required />
+                </div>
+                <div class="input-group">
+                  <label for="balance">balance</label>
+                  <input type="balance" id="balance" name="balance" required />
+                </div>
+                <div class="input-group">
+                  <button class="b" type="submit">Login</button>
+                  <br />
+                  <br />
+                </div>
+              </form>
             </div>
           </div>
         </div>
         <div class="mt-3 gap-2 d-flex justify-content-end">
-          <button
+          <!-- <button
             class="px-3 btn btn-sm btn-primary"
-            onclick="addBankAccount()"
-          >
+            >
             Submit
-          </button>
+          </button> -->
         </div>
       </div>
     </div>
