@@ -10,10 +10,11 @@ export class AuthService {
     private jwatService: JwtService,
     private encryptionService: EncryptionService,
   ) {}
+
   async validateUser(email: string, password: string): Promise<any> {
     const user = await this.userService.findUserByEmail(email);
     if (!user) throw new UnauthorizedException();
-    if (user.password != this.encryptionService.hashPassword(password))
+    if (user.password != password)
       throw new UnauthorizedException();
     return user;
   }

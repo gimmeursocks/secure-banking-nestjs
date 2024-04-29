@@ -37,4 +37,21 @@ export class BankAccountService {
       throw error;
     }
   }
+
+  async updateByNum(num: string, balance: string): Promise<BankAccount | null> {
+    try {
+      const encryptedNum = this.encryptionService.encryptData(num);
+      const existingAccount = await BankAccount.findOne({
+        where: { account_num: encryptedNum },
+      });
+      if (existingAccount) {
+        existingAccount.balance = this.encryptionService.encryptData(balance);
+        await existingAccount.save();
+        return existingAccount.dataValues;
+      }
+      return null;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

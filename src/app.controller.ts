@@ -1,4 +1,4 @@
-import { Controller, Get, Query, Param, Post, Body } from '@nestjs/common';
+import { Controller, Get, Query, Param, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
 import { User } from './users/user.entity';
 import { BankAccount } from './banks/bank-account/bank-account.entity';
@@ -6,7 +6,6 @@ import { Transaction } from './banks/transactions/transaction.entity';
 import { UserService } from './users/user.service';
 import { EncryptionService } from './encryption/encryption.service';
 import { BankAccountService } from './banks/bank-account/bank-account.service';
-import { response } from 'express';
 
 @Controller()
 export class AppController {
@@ -34,13 +33,18 @@ export class AppController {
   }
 
   @Post('signup')
-  async makeUser(@Body() req: any): Promise<any> {
-    console.log(req);
-    const user = await this.userService.createUser(req);
-    if (!user) {
-      return response.status(500).send("User creation failed");
+  async makeUser(@Body() userData: any): Promise<any> {
+    try {
+      console.log(userData);
+      const user = await this.userService.createUser(userData);
+      if (!user) {
+        throw new HttpException("User creation failed", HttpStatus.INTERNAL_SERVER_ERROR);
+      }
+      return user;
+    } catch (error) {
+      console.error("Error creating user:", error);
+      throw new HttpException("Internal Server Error", HttpStatus.INTERNAL_SERVER_ERROR);
     }
-    return response.status(200).send(user);
   }
 
   @Post('ttt')
