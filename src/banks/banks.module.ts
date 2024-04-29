@@ -4,9 +4,10 @@ import { EncryptionService } from 'src/encryption/encryption.service';
 import { BankAccountController } from './bank-account/bank-account.controller';
 import { TransactionController } from './transactions/transaction.controller';
 import { TransactionService } from './transactions/transaction.service';
+import { UserService } from 'src/users/user.service';
 
 @Module({
-  providers: [BankAccountService, TransactionService, EncryptionService],
+  providers: [UserService, BankAccountService, TransactionService, EncryptionService],
   controllers: [BankAccountController, TransactionController],
   exports: [BankAccountService],
 })

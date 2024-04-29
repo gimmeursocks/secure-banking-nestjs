@@ -12,7 +12,7 @@ export class BankAccountController {
   async createAccount(@Body() req: any): Promise<any> {
     return this.bankAccountService.CreateAccount(req);
   }
-
+  
   @Post('view')
   async viewAccount(@Body() req: any): Promise<any> {
     return this.bankAccountService.findByNum(req.account_num);

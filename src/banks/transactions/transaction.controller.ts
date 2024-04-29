@@ -1,4 +1,4 @@
-import { TransactionService } from './transaction.service'
+import { TransactionService } from './transaction.service';
 import { Body, Controller, Get, Post } from '@nestjs/common';
 
 @Controller('trans')

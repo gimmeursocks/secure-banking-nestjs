@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="shared/shared.css" />
+    <link rel="stylesheet" type="text/css" href="css/user_home.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+      $(function () {
+        $("#header").load("shared/header.html");
+        $("#footer").load("shared/footer.html");
+      });
+    </script>
+
+    <title>Banking site</title>
+
+    <header>
+      <div id="header"></div>
+
+      <div class="heading">
+        <h2>TSF BANK</h2>
+      </div>
+
+      <div class="title">
+        <h2>WELCOME</h2>
+      </div>
+    </header>
+  </head>
+
+  <body>
+    <div>
+      <form>
+        <section>
+          <br />
+          <br />
+          <div class="class">
+            <h2>choose your transaction for today!</h2>
+          </div>
+          <div class="center-container">
+            <a href="transfer.html"
+              ><button type="button" class="rounded-button">Transfer</button></a
+            >
+            <a href="transactions.html"
+              ><button type="button" class="rounded-button">Past Transactions</button></a
+            >
+            <a href="donate.html"
+              ><button type="button" class="rounded-button">Donate</button></a
+            >
+          </div>
+          <br /><br /><br /><br /><br /><br />
+        </section>
+      </form>
+    </div>
+
+    <div id="footer"></div>
+  </body>
+</html>

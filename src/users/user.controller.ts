@@ -1,15 +1,29 @@
-import { User } from './user.entity';
 import { UserService } from './user.service';
-import { EncryptionService } from '../encryption/encryption.service';
-import { BankAccount } from '../banks/bank-account/bank-account.entity';
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
 
-@Controller('users')
+@Controller()
 export class UserController {
   constructor(private userService: UserService) {}
 
-  @Get()
-  findAll(): string[] {
-    return this.userService.findAll();
+  @Post('signup')
+  async makeUser(@Body() userData: any): Promise<any> {
+    try {
+      console.log(userData);
+      const user = await this.userService.createUser(userData);
+      if (!user) {
+        throw new HttpException(
+          'User creation failed',
+          HttpStatus.INTERNAL_SERVER_ERROR,
+        );
+      }
+      return user;
+    } catch (error) {
+      console.error('Error creating user:', error);
+      throw new HttpException(
+        'Internal Server Error',
+        HttpStatus.INTERNAL_SERVER_ERROR,
+      );
+    }
   }
+
 }

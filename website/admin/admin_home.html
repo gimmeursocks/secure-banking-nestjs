@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="../shared/shared.css" />
+    <link rel="stylesheet" type="text/css" href="../css/admin.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <script src="../js/jquery-3.7.1.min.js"></script>
+    <script>
+      $(function () {
+        $("#header").load("../shared/header_admin.html");
+        $("#footer").load("../shared/footer.html");
+      });
+    </script>
+
+    <title>Admin View</title>
+  </head>
+
+  <body>
+    <header>
+      <div id="header"></div>
+      <div class="heading">
+        <h2>TSF BANK</h2>
+      </div>
+    </header>
+    <div class="x">
+      <div class="hadmin">
+        <p>Hi Admin..!<br />Choose what do you wanna to do</p>
+      </div>
+
+      <section class="cards" id="ad-tran">
+        <div class="content">
+          <div class="card">
+            <a href="show_customer.html"
+              ><img
+                src="../img/users.jpg"
+                width="250px;"
+                style="border-radius: 10px"
+            /></a>
+            <div class="info">
+              <p>Show Users Info</p>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="card">
+            <a href="add_acc.html"
+              ><img
+                src="../img/database.jpg"
+                width="250px;"
+                style="border-radius: 10px"
+            /></a>
+            <div class="info">
+              <p>Add Bank Accounts</p>
+            </div>
+          </div>
+        </div>
+        <div class="content">
+          <div class="card">
+            <a href="show_trans.html"
+              ><img
+                src="../img/trans.jpg"
+                width="250px;"
+                style="border-radius: 10px"
+            /></a>
+            <div class="info">
+              <p>Show Past Transactions</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="footer"></div>
+    </div>
+  </body>
+</html>

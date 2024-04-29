@@ -1,0 +1,178 @@
+header {
+  background-image: linear-gradient(rgba(39, 40, 44, 0.7), rgba(4, 9, 30, 0.7)),
+    url("../img/admin.jpg");
+  height: 70vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #f44336;
+  padding: 12px 34px;
+  font-size: 13px;
+  background-color: #f44336;
+  cursor: pointer;
+  position: relative;
+  margin-top: 380px;
+  margin-left: 380px;
+}
+
+.hero-btn:hover {
+  border: 1px solid #050a30;
+  background: #050a30;
+  transition: 1s;
+}
+
+.Branches {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 50px;
+}
+
+.campus-col {
+  flex-basis: 32%;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+.row {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.campus-col img {
+  width: 100%;
+  display: block;
+}
+
+.facilities {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.facilities-col {
+  flex-basis: 31%;
+  border-radius: 10px;
+  margin-bottom: 5%;
+  text-align: left;
+}
+
+.facilities-col img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.facilities-col p {
+  padding: 0;
+}
+
+.facilities-col h3 {
+  margin-top: 16px;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.hero1-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid #f44336;
+  padding: 12px 34px;
+  font-size: 13px;
+  background-color: #f44336;
+  cursor: pointer;
+  position: relative;
+  margin-top: 50px;
+  margin-left: 6px;
+}
+
+.hero1-btn:hover {
+  border: 1px solid #050a30;
+  background: #050a30;
+  transition: 1s;
+}
+
+.y {
+  color: white;
+  font-size: 20px;
+}
+
+.z {
+  color: white;
+  font-size: 20px;
+  background-color: #333333;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: 800;
+  margin-bottom: 5%;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: non-wrap;
+}
+
+.card {
+  background-color: #0e3353;
+  width: 250px;
+  box-shadow: 0 5px 25px rgb(3, 21, 50);
+  border-radius: 10px;
+  margin: 50px;
+  transition: 0.6s ease;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.info {
+  text-align: center;
+}
+
+.info h4 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 10px;
+}
+
+.info p {
+  font-size: 15px;
+  padding: 5px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.container {
+  max-width: 1190px;
+  margin: auto;
+}
+
+.row {
+  display: flex;
+}
+
+ul {
+  list-style: none;
+}
+
+.hadmin p {
+  font-size: 25px;
+  color: #0e3353;
+  margin-left: 7%;
+  margin-top: 10%;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="shared/shared.css" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+      $(function () {
+        $("#header").load("shared/header.html");
+        $("#footer").load("shared/footer.html");
+      });
+    </script>
+
+    <title>Banking site</title>
+  </head>
+
+  <body>
+    <header>
+      <div id="header"></div>
+      <div class="heading">
+        <h2>TSF BANK</h2>
+      </div>
+
+      <div class="title">
+        <h2>WELCOME TO TSF.</h2>
+      </div>
+    </header>
+
+    <div class="Branches">
+      <h2>Our Branches PAN EGYPT</h2>
+      <p>Reach Us, Contact Us and Locate Branches and ATMs of TSF.</p>
+      <br />
+
+      <div class="row">
+        <div class="campus-col">
+          <img src="img/cairo.png" />
+          <div class="layer">
+            <h3>CAIRO</h3>
+          </div>
+        </div>
+
+        <div class="campus-col">
+          <img src="img/giza.png" />
+          <div class="layer">
+            <h3>GIZA</h3>
+          </div>
+        </div>
+
+        <div class="campus-col">
+          <img src="img/alex.png" />
+          <div class="layer">
+            <h3>ALEX</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="facilities">
+      <h2>Facilities We Provide</h2>
+      <p>
+        Our Bank provides a number of facilities for the convenience of our
+        customers
+      </p>
+      <br />
+
+      <div class="row">
+        <div class="facilities-col">
+          <img src="img/transfer.jpg" />
+          <h3>Fund Transfer</h3>
+          <p>Transfer your funds between checking and savings.</p>
+        </div>
+
+        <div class="facilities-col">
+          <img src="img/balance.jpg" />
+          <h3>Check Balances</h3>
+          <p>Checking deposits and any loans.</p>
+        </div>
+
+        <div class="facilities-col">
+          <img src="img/account.jpg" />
+          <h3>View Account Activity</h3>
+          <p>Deposits, withdrawals, payments cleared, interest credited.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <h2>Experience effortless banking from anywhere across the world</h2>
+      <a href="contact.html" class="hero1-btn">Contact Us</a>
+    </div>
+
+    <div id="footer"></div>
+  </body>
+</html>

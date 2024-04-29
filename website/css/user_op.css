@@ -1,0 +1,120 @@
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+body {
+  background-color: #dee2e6;
+}
+
+header {
+  background-image: linear-gradient(rgba(4, 9, 30, 0.7), rgba(4, 9, 30, 0.7)),
+    url("../img/user_home.jpg");
+  height: 24vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.card {
+  border: none;
+  margin-bottom: 1rem !important;
+}
+
+.image {
+  position: relative;
+}
+
+.image span {
+  background-color: blue;
+  color: #fff;
+  padding: 6px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  font-size: 13px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: -0px;
+  right: 0px;
+}
+
+.user-details h4 {
+  color: blue;
+}
+
+.user-details span {
+  text-align: left;
+}
+
+.inputs label {
+  display: flex;
+  margin-left: 3px;
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.inputs input {
+  font-size: 14px;
+  height: 40px;
+  border: 2px solid #ced4da;
+}
+
+.inputs input:focus {
+  box-shadow: none;
+  border: 2px solid blue;
+}
+
+.about-inputs label {
+  display: flex;
+  margin-left: 3px;
+  font-weight: 500;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+.about-inputs textarea {
+  font-size: 14px;
+  height: 100px;
+  border: 2px solid #ced4da;
+  resize: none;
+}
+
+.about-inputs textarea:focus {
+  box-shadow: none;
+}
+
+.btn {
+  font-weight: 600;
+}
+
+.btn:focus {
+  box-shadow: none;
+}
+
+#delete {
+  margin-right: 100px;
+  margin-left: 100px;
+  margin-top: 123px;
+  background-color: white;
+  height: 200px;
+  width: 870px;
+}
+
+#delete_text {
+  display: grid;
+  justify-items: start;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="shared/shared.css" />
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <script type="module" src="js/login.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+      $(function () {
+        $("#header").load("shared/header.html");
+      });
+    </script>
+
+    <title>Banking Site</title>
+  </head>
+  <body>
+    <header>
+      <div id="header"></div>
+      <div class="container">
+        <form id="loginForm">
+          <h2>Login</h2>
+          <div class="input-group">
+            <label for="email">E-mail</label>
+            <input type="text" id="email" name="email" required />
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required />
+          </div>
+          <div class="input-group">
+            <button class="b" type="submit">Login</button>
+            <br />
+            <br />
+          </div>
+        </form>
+        <a href="signup.html" class="info">
+          <button class="b">Don't have account</button>
+        </a>
+      </div>
+    </header>
+  </body>
+</html>

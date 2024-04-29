@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="shared/shared.css" />
+    <link rel="stylesheet" type="text/css" href="css/transfer.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+    />
+    <script type="module" src="js/transfer.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script>
+      $(function () {
+        $("#header").load("shared/header.html");
+        $("#footer").load("shared/footer.html");
+      });
+    </script>
+
+    <title>Banking site</title>
+
+    <header>
+      <div id="header"></div>
+    </header>
+
+    <div class="heading">
+      <h2>TSF BANK</h2>
+    </div>
+
+    <div class="title">
+      <h2>TRANSFER FUNDS</h2>
+    </div>
+  </head>
+  <body>
+    <div class="container" id="container-2">
+      <form id="transferForm">
+        <div class="container" id="container-4">
+          <label for="to" style="margin-bottom: 30px">TO</label>
+          <div class="form-group">
+            <label for="account_num">Account number</label>
+            <input type="text" id="account_num" required />
+          </div>
+
+          <div class="form-group">
+            <label for="account_num_2">Re-enter account number</label>
+            <input type="text" id="account_num_2" required />
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" id="amount" required />
+          </div>
+
+          <div class="form-group">
+            <button type="submit">Submit Transfer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div id="footer"></div>
+  </body>
+</html>

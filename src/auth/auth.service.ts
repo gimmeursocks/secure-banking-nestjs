@@ -7,7 +7,7 @@ import { EncryptionService } from '../encryption/encryption.service';
 export class AuthService {
   constructor(
     private userService: UserService,
-    private jwatService: JwtService,
+    private jwtService: JwtService,
     private encryptionService: EncryptionService,
   ) {}
 
@@ -21,10 +21,12 @@ export class AuthService {
 
   async generateToken(user: any) {
     return {
-      access_token: this.jwatService.sign({
+      access_token: this.jwtService.sign({
         sub: user.email,
         username: user.username,
         role: user.role,
+      },{
+        expiresIn: '30 days'
       }),
       role: user.role,
     };
