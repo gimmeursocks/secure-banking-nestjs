@@ -17,28 +17,12 @@ export class UserService {
 
   async createUser(userData: any): Promise<User> {
     try {
-      const encryptedUserData: any = {};
-      for (const key in userData) {
-        if (Object.prototype.hasOwnProperty.call(userData, key)) {
-          if (key === 'password') {
-            encryptedUserData[key] = this.encryptionService.hashPassword(
-              userData[key],
-            );
-          } else if (key === 'role') {
-            encryptedUserData[key] = userData[key];
-          } else {
-            encryptedUserData[key] = this.encryptionService.encryptData(
-              userData[key],
-            );
-          }
-        }
-      }
       if (userData.account_num) {
         const existingUser = await this.bankservice.findByNum(
           userData.account_num,
         );
         if (existingUser) {
-          const user = await User.create(encryptedUserData);
+          const user = await User.create(userData);
           return user;
         }
       }
@@ -50,8 +34,7 @@ export class UserService {
 
   async findUserByEmail(email: string): Promise<User | null> {
     try {
-      const encryptedEmail = this.encryptionService.encryptData(email);
-      const user = await User.findOne({ where: { email: encryptedEmail } });
+      const user = await User.findOne({ where: { email: email } });
 
       if (user) {
         for (const key in user.dataValues) {

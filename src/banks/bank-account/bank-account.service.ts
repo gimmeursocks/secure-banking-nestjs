@@ -8,16 +8,7 @@ export class BankAccountService {
 
   async CreateAccount(account: any): Promise<BankAccount> {
     try {
-      const encryptedUserData: any = {};
-      for (const key in account) {
-        if (Object.prototype.hasOwnProperty.call(account, key)) {
-          encryptedUserData[key] = this.encryptionService.encryptData(
-            account[key],
-          );
-        }
-      }
-
-      const bank = await BankAccount.create(encryptedUserData);
+      const bank = await BankAccount.create(account);
       return bank;
     } catch (error) {
       throw error;
@@ -26,9 +17,8 @@ export class BankAccountService {
 
   async findByNum(num: string): Promise<BankAccount | null> {
     try {
-      const encryptedNum = this.encryptionService.encryptData(num);
       const existingAccount = await BankAccount.findOne({
-        where: { account_num: encryptedNum },
+        where: { account_num: num },
       });
       if (existingAccount) {
         for (const key in existingAccount.dataValues) {

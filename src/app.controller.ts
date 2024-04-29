@@ -6,6 +6,7 @@ import { Transaction } from './banks/transactions/transaction.entity';
 import { UserService } from './users/user.service';
 import { EncryptionService } from './encryption/encryption.service';
 import { BankAccountService } from './banks/bank-account/bank-account.service';
+import { response } from 'express';
 
 @Controller()
 export class AppController {
@@ -21,11 +22,6 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('trans/:acc_num')
-  getData(@Param('acc_num') acc_num: string): any {
-    return BankAccount.findByPk(acc_num);
-  }
-
   @Get('make')
   makeAcc(
     @Query('account_num') account_num: string,
@@ -39,24 +35,12 @@ export class AppController {
 
   @Post('signup')
   async makeUser(@Body() req: any): Promise<any> {
-    const existingUser = await BankAccount.findByPk(req.AccountNum);
-    if (!existingUser) {
-      return 'User not found';
-    }
-    const user = await User.create(req);
-    if (!user) {
-      return 'a7a';
-    }
-    return user;
-  }
-
-  @Post('yarab')
-  async makeUse(@Body() req: any): Promise<any> {
+    console.log(req);
     const user = await this.userService.createUser(req);
     if (!user) {
-      return 'a7a';
+      return response.status(500).send("User creation failed");
     }
-    return user;
+    return response.status(200).send(user);
   }
 
   @Post('ttt')
