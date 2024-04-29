@@ -33,9 +33,10 @@ async function encryptData(data) {
     return encryptedDataHex;
 }
 
-async function decryptData(encryptedData) {
+async function decryptData(encryptedDataHex) {
     const key = await getKey();
     const iv = new Uint8Array(config.FIXED_IV.match(/.{2}/g).map(byte => parseInt(byte, 16)));
+    const encryptedData = new Uint8Array(encryptedDataHex.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
     const decryptedData = await window.crypto.subtle.decrypt(
         { name: config.ENC_ALGO, iv: iv },
         key,
@@ -68,4 +69,29 @@ export async function encryptUser(userData) {
     }
 
     return encryptedUserData;
+}
+
+export async function encryptObject(data) {
+    const encryptedData = {};
+    for (const key in data) {
+        const encryptedValue = await encryptData(data[key]);
+        encryptedData[key] = encryptedValue;
+    }
+    return encryptedData;
+}
+
+export async function decryptTrans(data) {
+    const decryptedData = {};
+    for (const key in data) {
+        if(key == 'id'){
+            decryptedData[key] = data[key];
+        }
+        else if (key !== 'createdAt' && key !== 'updatedAt') {
+            const decryptedValue = await decryptData(data[key]);
+            console.log(decryptedValue)
+            decryptedData[key] = decryptedValue;
+        }
+    }
+    console.log('Decrypted data:', decryptedData);
+    return decryptedData;
 }
