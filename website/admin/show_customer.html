@@ -16,7 +16,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
     />
     <script src="../js/jquery-3.7.1.min.js"></script>
-    <script src="../js/show-users.js"></script>
+    <script type="module" src="../js/show_users.js"></script>
     <script>
       $(function () {
         $("#header").load("../shared/header_admin.html");
@@ -38,10 +38,22 @@
         <h2>CUSTOMERS INFO</h2>
       </div>
     </header>
-
-    <table id="customerTable">
-      
-    </table>
+    <div>
+      <table id="dataTable">
+        <thead>
+          <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>account_num</th>
+            <th>phone</th>
+            <th>SSN</th>
+            <th>gender</th>
+            <th>address</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
 
     <div id="footer"></div>
   </body>

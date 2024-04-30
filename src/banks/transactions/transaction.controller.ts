@@ -29,9 +29,17 @@ export class TransactionController {
   }
   
   @Post('view')
-  @UseGuards(JwtAuthGuard)
+  @Roles(Role.User)
+  @UseGuards(JwtAuthGuard, RolesGuard)
   async viewTrans(@Request() req: any): Promise<any> {
     const email = this.encryptionService.encryptData(req.user.email);
     return this.transactionService.viewTransactions(email);
+  }
+
+  @Post('admin/view')
+  @Roles(Role.Admin)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async viewAllTrans(@Request() req: any): Promise<any> {
+    return this.transactionService.viewAllTransactions();
   }
 }

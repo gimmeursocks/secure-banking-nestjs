@@ -61,6 +61,8 @@ export class BankAccountService {
     }
   }
 
+
+
   async updateByNum(num: string, balance: string): Promise<BankAccount | null> {
     try {
       const encryptedNum = this.encryptionService.encryptData(num);

@@ -80,6 +80,19 @@ export async function encryptObject(data) {
     return encryptedData;
 }
 
+export async function decryptUser(data) {
+    const decryptedData = {};
+    for (const key in data) {
+        if (key !== 'createdAt' && key !== 'updatedAt' && key !== "password" && key !== "role") {
+            const decryptedValue = await decryptData(data[key]);
+            console.log(decryptedValue)
+            decryptedData[key] = decryptedValue;
+        }
+    }
+    console.log('Decrypted data:', decryptedData);
+    return decryptedData;
+}
+
 export async function decryptTrans(data) {
     const decryptedData = {};
     for (const key in data) {

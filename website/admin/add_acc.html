@@ -19,6 +19,12 @@
   <link rel="stylesheet" href="../css/user_op.css" />
   <script src="../js/jquery-3.7.1.min.js"></script>
   <script src="../js/addAccount.js" type="module"></script>
+  <script>
+    $(function () {
+      $("#header").load("../shared/header_admin.html");
+      $("#footer").load("../shared/footer.html");
+    });
+  </script>
   <title>Admin View</title>
 </head>
 <body>
@@ -35,20 +41,20 @@
         <div class="col-md-6">
           <div class="inputs">
             <form id="addForm">
-              <div class="row">
+              <!-- <div class="row"> -->
                 <div class="col">
-                  <div class="input-group mb-4"> <!-- Increased margin-bottom -->
-                    <label for="balance">Balance</label>
-                    <input type="number" id="balance" name="balance" class="form-control" style="width: 100px;" required />
-                  </div>
-                </div>
-                <div class="col">
-                  <div class="input-group mb-4"> <!-- Increased margin-bottom -->
+                  <div class="input-group mb-4">
                     <label for="account_num">Account Number</label>
                     <input type="text" id="account_num" name="account_num" class="form-control" style="width: 100px;" required />
                   </div>
                 </div>
-              </div>
+                <div class="col">
+                  <div class="input-group mb-4">
+                    <label for="balance">Balance</label>
+                    <input type="number" id="balance" name="balance" class="form-control" style="width: 100px;" required />
+                  </div>
+                </div>
+              <!-- </div> -->
               <div class="input-group mt-3">
                 <button class="b" type="submit">Add Account</button>
               </div>

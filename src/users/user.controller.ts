@@ -1,8 +1,13 @@
+import { Role } from 'src/auth/role.enum';
 import { UserService } from './user.service';
-import { Controller, Get, Post, Body, HttpException, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Post, Body, HttpException, HttpStatus, Request, UseGuards } from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { RolesGuard } from 'src/auth/roles.guard';
+import { Roles } from 'src/auth/roles.decorator';
 
 @Controller()
 export class UserController {
+  bankAccountService: any;
   constructor(private userService: UserService) {}
 
   @Post('signup')
@@ -26,4 +31,18 @@ export class UserController {
     }
   }
 
+  @Post('admin/users')
+  @Roles(Role.Admin)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async allUsers(@Request() req: any): Promise<any> {
+    return this.userService.getAllUsers();
+  }
+
+
+  @Post('bank/check')
+  @Roles(Role.User)
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  async checkBalance(@Request() req: any): Promise<any> {
+    return this.userService.checkBalance(req.user.email);
+  }
 }

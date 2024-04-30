@@ -9,9 +9,10 @@ import { UserService } from './users/user.service';
 import { EncryptionService } from './encryption/encryption.service';
 import { TransactionService } from './banks/transactions/transaction.service';
 import { BankAccountService } from './banks/bank-account/bank-account.service';
+import { BankAccountModule } from './banks/bank-account/bank-account.module';
 
 @Module({
-  imports: [UsersModule, BanksModule, AuthModule, TransactionModule],
+  imports: [UsersModule, BanksModule, AuthModule, TransactionModule, BankAccountModule],
   controllers: [AppController],
   providers: [AppService, BankAccountService, UserService, EncryptionService, TransactionService],
 })

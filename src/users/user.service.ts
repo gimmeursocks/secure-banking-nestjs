@@ -89,4 +89,41 @@ export class UserService {
       throw error;
     }
   }
+
+  async getAllUsers(): Promise<any> {
+    try {
+      const users = await User.findAll();
+      if (users) {
+        return users;
+      } else {
+        return false; // User not found
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async checkBalance(email: string): Promise<any> {
+    try {
+      const userAccount = this.findUserByEmail(this.encryptionService.encryptData(email));
+      const existingAccount = await BankAccount.findOne({
+        where: { account_num: this.encryptionService.encryptData((await userAccount).account_num) },
+      });
+      if (existingAccount) {
+        for (const key in existingAccount.dataValues) {
+          if (
+            existingAccount.dataValues[key] &&
+            key != 'createdAt' &&
+            key != 'updatedAt'
+          ) {
+            existingAccount.dataValues[key] =
+              this.encryptionService.decryptData(existingAccount[key]);
+          }
+        }
+      }
+      return existingAccount.dataValues.balance;
+    } catch (error) {
+      throw error;
+    }
+  }
 }

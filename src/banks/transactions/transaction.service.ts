@@ -59,4 +59,13 @@ export class TransactionService {
       throw error;
     }
   }
+
+  async viewAllTransactions(): Promise<Transaction[]> {
+    try {
+      const transactions = await Transaction.findAll();
+      return transactions;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
