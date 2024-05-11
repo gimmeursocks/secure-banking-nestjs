@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EncryptionService } from '../../encryption/encryption.service';
+import { EncryptionService } from 'src/encryption/encryption.service';
 import { Transaction } from './transaction.entity';
 import { UserService } from 'src/users/user.service';
 import { BankAccountService } from '../bank-account/bank-account.service';
@@ -12,7 +12,6 @@ export class TransactionService {
     private userService: UserService,
     private bankService: BankAccountService,
   ) {}
-
 
   async makeTransaction(transData: any): Promise<Transaction> {
     const sender = await this.userService.findUserByEmail(transData.sender);
@@ -30,20 +29,13 @@ export class TransactionService {
     if (parseFloat(bankAccSender.balance) < parseFloat(amount)) {
       return null;
     }
-    const recieverMoney =
-      parseFloat(bankAccReciever.balance) + parseFloat(amount);
+    const recieverMoney = parseFloat(bankAccReciever.balance) + parseFloat(amount);
     const senderMoney = parseFloat(bankAccSender.balance) - parseFloat(amount);
 
     const transaction = await Transaction.create(transData);
 
-    await this.bankService.updateByNum(
-      bankAccReciever.account_num,
-      recieverMoney.toString(),
-    );
-    await this.bankService.updateByNum(
-      bankAccSender.account_num,
-      senderMoney.toString(),
-    );
+    await this.bankService.updateByNum(bankAccReciever.account_num, recieverMoney.toString());
+    await this.bankService.updateByNum(bankAccSender.account_num, senderMoney.toString());
     return transaction;
   }
 

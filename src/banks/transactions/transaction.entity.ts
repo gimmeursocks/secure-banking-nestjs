@@ -1,11 +1,5 @@
-import { User } from '../../users/user.entity';
-import {
-  Model,
-  DataType,
-  Table,
-  Column,
-  ForeignKey,
-} from 'sequelize-typescript';
+import { User } from 'src/users/user.entity';
+import { Model, DataType, Table, Column, ForeignKey } from 'sequelize-typescript';
 
 @Table
 export class Transaction extends Model {

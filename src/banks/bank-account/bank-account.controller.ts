@@ -1,9 +1,9 @@
-import { Roles } from 'src/auth/roles.decorator';
-import { BankAccountService } from './bank-account.service';
-import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
-import { Role } from 'src/auth/role.enum';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Role } from 'src/auth/role.enum';
+import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
+import { BankAccountService } from './bank-account.service';
 
 @Controller('bank')
 export class BankAccountController {

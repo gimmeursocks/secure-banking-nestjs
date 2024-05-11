@@ -1,11 +1,5 @@
-import {
-  Model,
-  DataType,
-  Table,
-  Column,
-  ForeignKey,
-} from 'sequelize-typescript';
-import { BankAccount } from '../banks/bank-account/bank-account.entity';
+import { Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
+import { BankAccount } from 'src/banks/bank-account/bank-account.entity';
 
 @Table
 export class User extends Model {

@@ -1,10 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
+import { NestFactory } from '@nestjs/core';
 import { Sequelize } from 'sequelize-typescript';
+import { AppModule } from './app.module';
 import { BankAccount } from './banks/bank-account/bank-account.entity';
-import { User } from './users/user.entity';
 import { Transaction } from './banks/transactions/transaction.entity';
+import { User } from './users/user.entity';
 
 const databaseName = process.env.DATABASE_NAME;
 const databaseUser = process.env.DATABASE_USER;

@@ -1,17 +1,10 @@
-import { Roles } from 'src/auth/roles.decorator';
-import { TransactionService } from './transaction.service';
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  UseGuards,
-  Request,
-} from '@nestjs/common';
-import { Role } from 'src/auth/role.enum';
+import { Controller, Post, Request, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Role } from 'src/auth/role.enum';
+import { Roles } from 'src/auth/roles.decorator';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { EncryptionService } from 'src/encryption/encryption.service';
+import { TransactionService } from './transaction.service';
 
 @Controller('trans')
 export class TransactionController {
@@ -27,7 +20,7 @@ export class TransactionController {
     req.body['sender'] = this.encryptionService.encryptData(req.user.email);
     return this.transactionService.makeTransaction(req.body);
   }
-  
+
   @Post('view')
   @Roles(Role.User)
   @UseGuards(JwtAuthGuard, RolesGuard)

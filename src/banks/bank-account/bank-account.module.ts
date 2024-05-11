@@ -1,19 +1,13 @@
 import { Module } from '@nestjs/common';
-import { TransactionService } from '../transactions/transaction.service';
-import { TransactionController } from '../transactions/transaction.controller';
 import { EncryptionService } from 'src/encryption/encryption.service';
 import { UserService } from 'src/users/user.service';
-import { BankAccountService } from './bank-account.service';
+import { TransactionService } from '../transactions/transaction.service';
 import { BankAccountController } from './bank-account.controller';
+import { BankAccountService } from './bank-account.service';
 
 @Module({
-  providers: [
-    TransactionService,
-    EncryptionService,
-    UserService,
-    BankAccountService,
-  ],
+  providers: [BankAccountService, TransactionService, EncryptionService, UserService],
   controllers: [BankAccountController],
-  exports: [BankAccountService],
+  exports: [BankAccountService]
 })
 export class BankAccountModule {}

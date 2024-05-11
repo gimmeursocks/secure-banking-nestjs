@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
+import { BankAccount } from 'src/banks/bank-account/bank-account.entity';
+import { BankAccountService } from 'src/banks/bank-account/bank-account.service';
+import { EncryptionService } from 'src/encryption/encryption.service';
 import { User } from './user.entity';
-import { EncryptionService } from '../encryption/encryption.service';
-import { BankAccount } from '../banks/bank-account/bank-account.entity';
-import { BankAccountService } from '../banks/bank-account/bank-account.service';
 
 @Injectable()
 export class UserService {
@@ -11,16 +11,10 @@ export class UserService {
     private bankservice: BankAccountService,
   ) {}
 
-  findAll(): string[] {
-    return ['User 1', 'User 2', 'User 3'];
-  }
-
   async createUser(userData: any): Promise<User> {
     try {
       if (userData.account_num) {
-        const existingUser = await this.bankservice.findByNum(
-          userData.account_num,
-        );
+        const existingUser = await this.bankservice.findByNum(userData.account_num);
         if (existingUser) {
           const user = await User.create(userData);
           return user;
@@ -39,16 +33,8 @@ export class UserService {
 
       if (user) {
         for (const key in user.dataValues) {
-          if (
-            user.dataValues[key] &&
-            key != 'password' &&
-            key != 'role' &&
-            key != 'updatedAt' &&
-            key != 'createdAt'
-          ) {
-            user.dataValues[key] = this.encryptionService.decryptData(
-              user[key],
-            );
+          if (user.dataValues[key] && key != 'password' && key != 'role' && key != 'updatedAt' && key != 'createdAt') {
+            user.dataValues[key] = this.encryptionService.decryptData(user[key]);
           }
         }
       }
@@ -59,17 +45,14 @@ export class UserService {
     }
   }
 
-  async updateUserByEmail(
-    email: string,
-    updateData: Partial<User>,
-  ): Promise<User | null> {
+  async updateUserByEmail(email: string, updateData: Partial<User>): Promise<User | null> {
     try {
       const user = await User.findOne({ where: { email } });
       if (user) {
         await user.update(updateData);
         return user;
       } else {
-        return null; // User not found
+        return null;
       }
     } catch (error) {
       throw error;
@@ -83,7 +66,7 @@ export class UserService {
         await user.destroy();
         return true;
       } else {
-        return false; // User not found
+        return false;
       }
     } catch (error) {
       throw error;
@@ -96,7 +79,7 @@ export class UserService {
       if (users) {
         return users;
       } else {
-        return false; // User not found
+        return false;
       }
     } catch (error) {
       throw error;
@@ -111,13 +94,8 @@ export class UserService {
       });
       if (existingAccount) {
         for (const key in existingAccount.dataValues) {
-          if (
-            existingAccount.dataValues[key] &&
-            key != 'createdAt' &&
-            key != 'updatedAt'
-          ) {
-            existingAccount.dataValues[key] =
-              this.encryptionService.decryptData(existingAccount[key]);
+          if (existingAccount.dataValues[key] && key != 'createdAt' && key != 'updatedAt') {
+            existingAccount.dataValues[key] = this.encryptionService.decryptData(existingAccount[key]);
           }
         }
       }

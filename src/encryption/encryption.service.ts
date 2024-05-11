@@ -29,7 +29,7 @@ export class EncryptionService {
     let decryptedData = decipher.update(encryptedData, 'hex', 'utf8');
     return (decryptedData += decipher.final('utf8'));
   }
-
+  
   hashPassword(password: string): string {
     const hash = Crypto.createHash(hashAlgo);
     hash.update(password);

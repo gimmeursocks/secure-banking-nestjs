@@ -1,14 +1,12 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UserService } from 'src/users/user.service';
 import { JwtService } from '@nestjs/jwt';
-import { EncryptionService } from '../encryption/encryption.service';
+import { UserService } from 'src/users/user.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private userService: UserService,
-    private jwtService: JwtService,
-    private encryptionService: EncryptionService,
+    private jwtService: JwtService
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
@@ -25,8 +23,6 @@ export class AuthService {
         sub: user.email,
         username: user.username,
         role: user.role,
-      },{
-        expiresIn: '30 days'
       }),
       role: user.role,
     };

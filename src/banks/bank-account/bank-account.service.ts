@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { EncryptionService } from '../../encryption/encryption.service';
+import { EncryptionService } from 'src/encryption/encryption.service';
 import { BankAccount } from './bank-account.entity';
 
 @Injectable()

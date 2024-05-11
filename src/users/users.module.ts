@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
-import { EncryptionService } from '../encryption/encryption.service';
+import { EncryptionService } from 'src/encryption/encryption.service';
 import { UserController } from './user.controller';
 import { BankAccountService } from 'src/banks/bank-account/bank-account.service';
 
